@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dgEph7T4pGtlSP3Xo9HrFvTqqk+KkQbIK86/rqw45AfK1JQwAbzFDbd4AuFWghus0lhNohbXNCcTlr7l9vr1ug==",
+  "dgSpecHash": "VwBDDl8dfO+F16fE9W/6uFvljMKbiVI7R5t80zJr8maRyUE/TIp8c8ZYlESZlWQgauSYKkRkLApZKGC0DslWpQ==",
   "success": true,
-  "projectFilePath": "D:\\Project\\ASP.NET-Core-and-SignalR---Real-Time-Chat-Application-master\\ChatApp\\ChatApp.csproj",
+  "projectFilePath": "C:\\Users\\AME\\Documents\\GitHub\\Chat-App\\Chat-App\\ChatApp\\ChatApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AME\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.6\\microsoft.aspnetcore.cryptography.internal.3.1.6.nupkg.sha512",
     "C:\\Users\\AME\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.6\\microsoft.aspnetcore.cryptography.keyderivation.3.1.6.nupkg.sha512",

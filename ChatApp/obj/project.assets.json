@@ -5163,11 +5163,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\ASP.NET-Core-and-SignalR---Real-Time-Chat-Application-master\\ChatApp\\ChatApp.csproj",
+      "projectUniqueName": "C:\\Users\\AME\\Documents\\GitHub\\Chat-App\\Chat-App\\ChatApp\\ChatApp.csproj",
       "projectName": "ChatApp",
-      "projectPath": "D:\\Project\\ASP.NET-Core-and-SignalR---Real-Time-Chat-Application-master\\ChatApp\\ChatApp.csproj",
+      "projectPath": "C:\\Users\\AME\\Documents\\GitHub\\Chat-App\\Chat-App\\ChatApp\\ChatApp.csproj",
       "packagesPath": "C:\\Users\\AME\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\ASP.NET-Core-and-SignalR---Real-Time-Chat-Application-master\\ChatApp\\obj\\",
+      "outputPath": "C:\\Users\\AME\\Documents\\GitHub\\Chat-App\\Chat-App\\ChatApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
