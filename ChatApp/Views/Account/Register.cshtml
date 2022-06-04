@@ -1,0 +1,19 @@
+<div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4 account-sign">
+    <form asp-controller="Account" asp-action="Register">
+        <div class="mb-1">
+            <input class="form-control" type="text" name="username" placeholder="Username">
+        </div>
+        <div class="mb-1">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="mb-1">
+            <input class="form-control" type="password" name="cpassword" placeholder="Confirm Password">
+        </div>
+        <button class="btn btn-primary  btn-block" type="submit">Register</button>
+        <div class="col-12 m-2">
+            <a asp-controller="Account" asp-action="Login">
+                <p style="text-decoration:none">Aleardy have an account</p>
+            </a>
+        </div>
+    </form>
+</div>

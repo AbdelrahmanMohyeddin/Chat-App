@@ -1,0 +1,143 @@
+@model Chat
+
+    <vc:heading></vc:heading>
+
+    <!-- Message Box -->
+    @if (Model != null)
+    {
+        <div class="row message chat-body" id="conversation">
+            
+            @foreach (var message in Model.Messages)
+            {
+                <div class="row message-body @(message.Name == User.Identity.Name ? "message-body-sender":"message-body-receiver") message">
+                    <div class="col-sm-12 @(message.Name == User.Identity.Name ? "message-main-sender":"message-main-receiver")">
+                        <div class="@(message.Name == User.Identity.Name ? "sender" : "receiver")">
+                            <div class="message-text">
+                                @message.Text
+                            </div>
+                            <span class="message-time pull-right">
+                                @message.Timestamp
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+       
+    <!-- Message Box End -->
+
+    <!-- Reply Box -->
+
+
+    <form onsubmit="sendMessage(event)" asp-controller="Home" asp-action="CreateMessage" class="row reply">
+        <div class="col-sm-1 col-xs-1 reply-emojis">
+            <i class="fa fa-smile-o fa-2x"></i>
+        </div>
+        <input type="hidden" name="roomId" value="@(Model != null?Model.Id:1) ">
+        <input type="hidden" name="userName" id="userName" value="@(User.Identity.Name) ">
+        <div class="col-sm-9 col-xs-9 reply-main">
+            <input type="text" name="message" id="message-input" class="form-control" rows="1">
+        </div>
+        <div class="col-sm-1 col-xs-1 reply-recording">
+            <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
+        </div>
+        <button type="submit" class="col-sm-1 col-xs-1 reply-send btn-sm btn">
+            <i class="fa fa-send fa-2x" aria-hidden="true"></i>
+        </button>
+    </form>
+    <!-- Reply Box End -->
+
+
+    
+@section scripts{
+    <script src="~/js/signalr.min.js"></script>
+    @*<script src="~/js/signalr.min.js.map"></script>*@
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var connection = new signalR.HubConnectionBuilder()
+                            .withUrl("/chatHub")
+                            .build();
+
+        var _connectionId = '';
+
+        function scrollBottom () {
+            var chatScroll = document.getElementById("conversation");
+            chatScroll.scrollTop = chatScroll.scrollHeight - chatScroll.clientHeight;
+        }
+
+        connection.on("ReceiveMessage", function (data) {
+            var currUser = document.getElementById("userName").value.replace(" ", '');
+
+            var message = document.createElement("div");
+            message.classList.add("row")
+            message.classList.add("message-body")
+            message.classList.add("message")
+            message.classList.add((currUser == data.name ? "message-body-sender" : "message-body-receiver"))
+
+            var messageBody = document.createElement("div");
+            messageBody.classList.add("col-sm-12")
+            messageBody.classList.add((currUser == data.name ?"message-main-sender":"message-main-receiver"))
+
+            var messageBodyType = document.createElement("div");
+            messageBodyType.classList.add((currUser == data.name ? "sender" : "receiver"))
+
+            var messageText = document.createElement("div")
+            messageText.classList.add("message-text")
+            messageText.appendChild(document.createTextNode(data.text))
+
+            var messageTimeStamp = document.createElement("span")
+            messageTimeStamp.classList.add("pull-right")
+            messageTimeStamp.classList.add("message-time")
+            messageTimeStamp.appendChild(document.createTextNode(data.timestamp))
+
+            messageBodyType.appendChild(messageText)
+            messageBodyType.appendChild(messageTimeStamp)
+            messageBody.appendChild(messageBodyType)
+            message.appendChild(messageBody)
+
+            var body = document.querySelector('.chat-body')
+            body.append(message)
+            scrollBottom()
+        })
+
+        var joinRoom = function()
+        {
+            axios.post('/Chat/JoinRoom/' + _connectionId + '/@(Model==null?1:Model.Id)', null)
+            .then(res =>{
+                console.log("Room Joined! ", res);
+            })
+            .catch(err =>{
+                console.log("Failed to join room! ", err);
+            })
+        }
+
+        connection.start()
+        .then(function(){
+            connection.invoke('getConnectionId')
+            .then(function(connectionId){
+                    _connectionId = connectionId
+                    joinRoom();
+            })
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+
+        //var form = null;
+        var sendMessage = function(event)
+        {
+            event.preventDefault();
+            var data = new FormData(event.target);
+            document.getElementById('message-input').value = '';
+            console.log(event);
+            axios.post('/Chat/SendMessage/', data)
+            .then(res=>{
+                console.log("message sent!", res ,data)
+            })
+            .catch(err=>{
+           console.log("error, message not sent!", err)
+            })
+        }
+    </script>
+}

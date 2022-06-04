@@ -1,0 +1,22 @@
+@model IEnumerable<Chat>
+@using System.Security.Claims;
+<div class="chat-body">
+    <div class="live-chat-image text-center">
+        <img src="~/images/live-chat.png" width="250" />
+        <h3>Chatting with friends for free</h3>
+        <p>Welcome to my chat app, you can chat with your friends and relatives for free and by easily.</p>
+    </div>
+    @*@foreach (var chat in Model)
+    {
+        <a class="room-button" asp-controller="Home" asp-action="JoinRoom" asp-route-id="@chat.Id">
+            @if (chat.Type == ChatType.Private)
+            {
+                @chat.Users.FirstOrDefault(u => u.UserId != User.FindFirst(ClaimTypes.NameIdentifier).Value).User.UserName
+            }
+            else
+            {
+                @chat.Name
+            }
+        </a>
+     }*@
+</div>

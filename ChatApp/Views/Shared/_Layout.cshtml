@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+ <html lang="eng">
+ <head>
+     <meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <title>ChatApp</title>
+     <link rel="stylesheet" href="~/css/site.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- Font Awesome File -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ </head>
+ <body>
+     <!--<header class="p-3 bg-dark text-white">
+         <div class="container">
+             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                     <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                 </a>
+
+                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                     <li><a class="nav-link px-2 text-white" asp-controller="Home" asp-action="Index">Home</a></li>
+                     <li><a class="nav-link px-2 text-white" asp-controller="Home" asp-action="Find">Find</a></li>
+                     <li><a class="nav-link px-2 text-white" asp-controller="Home" asp-action="Private">Private</a></li>
+                     <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+                     <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                 </ul>-->
+
+                 @*<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                     <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                 </form>*@
+
+                 <!--<div class="text-end">
+
+                     @if (User.Identity.IsAuthenticated)
+                     {
+                        <a  class="btn btn-outline-light me-2" asp-controller="Account" asp-action="Logout">Logout</a>
+                     }
+                     else
+                     {
+                        <a type="button" class="btn btn-outline-light me-2" asp-controller="Account" asp-action="Login">Login</a>
+                        <a type="button" class="btn btn-warning" asp-controller="Account" asp-action="Register">Register</a>
+                     }
+                 </div>
+             </div>
+         </div>
+     </header>-->
+     <div class="main container">
+             @if (User.Identity.IsAuthenticated)
+              {
+                 <div class=" app">
+                     <div class="row app-one">
+                         <div class="col-sm-4 side">
+                             <vc:room></vc:room>
+                         </div>
+                         <div class="col-sm-8 conversation">
+                             @RenderBody()
+                         </div>
+                     </div>
+                 </div>
+              }
+              else
+              {
+                <div class="chat col-12 row">
+                    @RenderBody()
+                </div>
+              }
+     </div>
+     
+
+     <div class="modal" id="create-room-modal">
+         <form asp-controller="Home" asp-action="CreateRoom" class="modal-body">
+             <button type="button" class="close" onclick="closeModal()">X</button>
+             <header>Create Room</header>
+             <div>
+                 <input name="name">
+             </div>
+             <footer>
+                 <button>Create</button>
+             </footer>
+         </form>
+     </div>
+
+     <script src="~/js/site.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+     @RenderSection("Scripts", false)
+ </body>
+</html>
