@@ -1,6 +1,2 @@
-appsettings.json
-ChatApp.csproj.nuget.dgspec
-ChatApp.csproj.nuget.g.props
-ChatApp.csproj.nuget.g.targets
-project.assets
-project.nuget.cache
+Chat-App/ChatApp/appsettings.json
+Chat-App/ChatApp/obj/**
